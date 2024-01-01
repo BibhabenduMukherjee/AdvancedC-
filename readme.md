@@ -53,3 +53,61 @@ Both references and pointers have their advantages and use cases. References are
 ## Dynamic Cast In C++
 
 In C++, dynamic_cast is a type of casting operator primarily used for performing safe downcasting in polymorphic class hierarchies involving inheritance and runtime type identification (RTTI). It's used to convert pointers or references of a base class to pointers or references of a derived class in a safe manner.
+
+## What Is Explicit Constructor In C++?
+
+An "__explicit constructor__" in C++ prevents implicit conversions during object initialization. When a constructor is marked as explicit, it indicates that the compiler __should not perform automatic conversions from the constructor's parameter type__ to the class type.
+
+
+Example without explicit:
+
+```c++
+
+class MyClass {
+public:
+    MyClass(int x) {
+        // Constructor code
+    }
+};
+
+void func(MyClass obj) {
+    // Function code
+}
+
+int main() {
+    MyClass obj1 = 10; // Implicit conversion allowed without 'explicit'
+    func(20); // Implicit conversion allowed without 'explicit'
+    return 0;
+}
+
+
+```
+
+In this example, MyClass has a constructor that takes an int parameter. Without explicit, the constructor can be used for implicit conversions. For instance, __MyClass obj1 = 10__; and __func(20)__; would both create temporary MyClass objects using the int values.
+
+Example with explicit:
+
+```c++
+
+class MyClass {
+public:
+    explicit MyClass(int x) {
+        // Constructor code
+    }
+};
+
+void func(MyClass obj) {
+    // Function code
+}
+
+int main() {
+    MyClass obj1 = 10; // Error due to 'explicit' - no implicit conversion
+    func(20); // Error due to 'explicit' - no implicit conversion
+    return 0;
+}
+
+
+
+```
+
+When the constructor is marked as __explicit__, explicit type conversion is required. In this case, using __MyClass obj1 = 10__; or __func(20)__; would result in a compilation error because the implicit conversion from int to MyClass is not allowed.
